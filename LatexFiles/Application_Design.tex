@@ -1,0 +1,80 @@
+
+\paragraph{}
+The \texttt{JavaScript} syntax is easy, without a lot of contraints like in \texttt{Java}. For example, semi-colons are not compulsary at the end of each statement.
+
+\subsection{Semi-colons}
+
+\subsection{Global and local variables}
+
+\subsection{Creating an object}
+\paragraph{}
+\texttt{JavaScript} offers several ways to create an object with its fields and its methods. The listings~\ref{way1},~\ref{way2} and~\ref{way3} show the different options.
+        
+\begin{lstlisting}[caption={Creating an object with a constructor}, label={way1}]
+function coordinates(x, y) {
+    // Definition of the fields
+    this.x = x;
+    this.y = y;
+    // Definition of the methods
+    this.setX = setX;
+    function setX(x) {
+        this.x = x;
+    }
+    this.setY = setY;
+    function setY(y) {
+        this.y = y;
+    }
+}
+var point = new coordinates(1, 2);
+\end{lstlisting}
+        
+\begin{lstlisting}[caption=Creating an object with the "C-structure" syntax, label={way2}]
+// We suppose the functions setX and setY are defined before
+var point = {x:1, y:2, setX:setX, setY:setY};
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Creating an object with the operator "new Object()", label={way3}]
+var point = new Object();
+point.x = 1;
+point.y = 2;
+// We suppose the functions setX and setY are defined before
+point.setX = setX;
+point.setY = setY;
+\end{lstlisting}
+
+Whatever the method used to create the object, it is always possible to add another field or another method dynamically (listing~\ref{addField}).
+\begin{lstlisting}[caption=Adding a new field or a new method dynamically", label={addField}]
+point.z = 3;
+function setZ(z) {
+        this.z = z;
+    }
+point.setZ = setZ;
+\end{lstlisting}
+
+\paragraph{}
+With the "C-structure" syntax and the operator \texttt{new Object()} it is very easy to develop a \texttt{JavaScript} application without thinking about the design of the application. Non-experienced developers may write code very quickly without thinking about readability for future developers and maintainability. However, the \texttt{JavaScript} constructors can be used as the classes in \texttt{Java} to define all the fields and the methods of an object.
+
+
+%%	Global object
+%%	code structure/design
+%%    Syntax and semantics
+%%        -blocks
+%%            function, 
+%%
+%%var carname="Volvo";
+%%var carname;
+%%    -> no error, the variable carname has still the value "Volvo"
+%%
+%%
+%%	- scope
+%%The lifetime JavaScript variables starts when they are declared.
+%%Local variables are deleted when the function is completed.
+%%Global variables are deleted when you close the page.
+%%
+%%
+%%	- semicolon
+%%Ending statements with semicolon is optional in JavaScript.
+%%	- this
+%%	- object vs function
+%%	- multi paradigm
+%%

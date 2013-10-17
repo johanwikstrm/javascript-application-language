@@ -1,13 +1,6 @@
 \documentclass{report}
-\usepackage[utf8]{inputenc}
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{hyperref}
-\def\thesection{\arabic{section}}
-\def\thetableofcontents{\arabic{section}}
 
+\usepackage{extension}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[L]{Johan Wikström, Anaël Bonneton}
@@ -22,77 +15,15 @@ Anaël Bonneton (abonneton) - 646275
 \tableofcontents
 
 \section{Introduction}
-\paragraph{}
-\texttt{Javascript} was created by Brendan Eich in 1995 for the company Netscape Communications Corporation. Nowdays, it is the most used programming language for client-side programming. It has also become common in sever-side programming. However, \texttt{Javascript} is still quite unpopular among professional developers. The main reason is that it was initially created to make programming easier than with traditional programming languanges such as \texttt{Java}. \texttt{Javascript} was created for the 'dummies'.
-\paragraph{}
-We will focus on the following question \emph{'Is JavaScript suitable for application programming?'} with different points of view : the syntax and the semantic, the type system, the application design and finally the security. 
+\input{./LatexFiles/Introduction}
 
 %%
 %%
 %%The DOM (Document Object Model) is the official W3C standard for accessing HTML elements. 
 %%
-\section{Syntax and semantics}
-%%    
-%%        -blocks
-%%            function, 
-%%
-%%var carname="Volvo";
-%%var carname;
-%%    -> no error, the variable carname has still the value "Volvo"
-%%
-%%creating an object -> new
-%%    -> in JavaScript everything is an object
-%%    -> different ways to create an object
-%%
-%%    ## with a constructor
-%%function person(firstname,lastname,age,eyecolor)
-%%{
-%%this.firstname=firstname;
-%%this.lastname=lastname;
-%%this.age=age;
-%%this.eyecolor=eyecolor;
-%%}
-%%var myFather=new person("John","Doe",50,"blue");
-%%var myMother=new person("Sally","Rally",48,"green");
-%%
-%%
-%%## Way to define a class (like in Java but everything in a constructor)
-%%## In JavaScript you don’t define classes and create objects from these classes (as in most other object oriented languages).
-%%## JavaScript is prototype based, not class based.
-%%function person(firstname,lastname,age,eyecolor)
-%%{
-%%this.firstname=firstname;
-%%this.lastname=lastname;
-%%this.age=age;
-%%this.eyecolor=eyecolor;
-%%
-%%this.changeName=changeName;
-%%function changeName(name)
-%%{
-%%this.lastname=name;
-%%}
-%%}
-%%
-%%    ## person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"}; 
-%%    ## 
-%%person=new Object();
-%%person.firstname="John";
-%%person.lastname="Doe";
-%%person.age=50;
-%%person.eyecolor="blue"; 
-%%
-%%	- scope
-%%The lifetime JavaScript variables starts when they are declared.
-%%Local variables are deleted when the function is completed.
-%%Global variables are deleted when you close the page.
-%%
-%%
-%%	- semicolon
-%%Ending statements with semicolon is optional in JavaScript.
-%%	- this
-%%	- object vs function
-%%	- multi paradigm
-%%
+\section{Application design}
+\input{./LatexFiles/Application_Design}
+
 
 \section{Type System}
 	JavaScript has a loose dynamic type system. This means that when you create a variable, you do not need to specify a type and the type of the variable can change during execution. Internally there is a type however and there are six internal types:
@@ -156,9 +87,7 @@ Another difference between Java and JavaScript is the way inheritance is impleme
 	- inheritance
 	- loose typing
 	- dynamic
-\section{Application design}
-	Global object
-	code structure/design
+
 
 \section{Security}
 %%	- XSS
