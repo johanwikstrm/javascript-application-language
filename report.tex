@@ -26,74 +26,14 @@ Anaël Bonneton (abonneton) - 646275
 
 
 \section{Type System}
-	JavaScript has a loose dynamic type system. This means that when you create a variable, you do not need to specify a type and the type of the variable can change during execution. Internally there is a type however and there are six internal types:
-	%http://www.2ality.com/2013/09/types.html
-	\begin{enumerate}
-	\item Undefined
-	\item Null
-	\item Boolean
-	\item String
-	\item Number
-	\item Object
-	\end{enumerate}
-		\begin{verbatim}
-	Java
-	int x = 1;
-	x = "hi";   // invalid, causes compiler error
-	\end{verbatim}
-	\begin{verbatim}
-	JavaScript
-	var x = 1;  // now x has Number type
-	x = "hi";   // now x has String type
-	x = {};     // now x has Object type
-	\end{verbatim}
-	If a variables type does not fit the operation that is applied on it, JavaScript will attempt to \emph{corece} the variable into that type.
-	\begin{verbatim}
-	'1'+'10' == 11 // true in javascript
-	\end{verbatim}
-	In general, JavaScript tries to recover from errors made by the programmer, by almost never throwing exceptions when encountering type errors. For example, when an uninitialized variable is used, there is no error but the variable is assigned the type Undefined and value undefined. This usually causes errors much later in the program when the value is used. The errors are exaggerated by the fact that several normal operations are defined for the undefined value which further delays detection of the error.
-	\begin{verbatim}
-	1+undefined == NaN
-	''+undefined == 'undefined'
-	undefined && true == undefined
-	undefined || true == true
-	\end{verbatim}
-This loose typing may be a disadvantage of the language when comparing the language to strongly typed languages such as Java. In Java the type system allows for static analysis of the code and many bugs are found at compile time. The true advantage of the loose type system only becomes apparent when the programmer uses the ability to augment types with new methods and properties at runtime.
-
-	\subsection{JavaScript Object and prototyping}
-	In Java, classes are static. There is no way to add a new method or property to an object after it is created. In JavaScript, there are no classes so all methods and properties are dynamically. This is a very powerful feature that may also be the cause of many bugs since properties and methods can be added and removed at any time during the programs execution.
-\begin{verbatim}
-JavaScript
-a = {} 	// empty object
-a.property = "a"
-a.method = function(){print("hello")}
-\end{verbatim}
-
-\begin{verbatim}
-Java
-class A {
-	public String property;
-	public void method(){
-		print("hello");
-	}
-}
-A a = new A();
-a.property = "a";
-a.property2 = "b"; // Invalid, was not specified in class
-\end{verbatim}
-%https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain
-Another difference between Java and JavaScript is the way inheritance is implemented. In Java, a class can statically inherit methods and variables from a parent class. In JavaScript, there are no classes, only dynamic objects, so JavaScript uses another form of inheritance. All objects in a JavaScript execution are linked to a prototype object. The prototype describes the methods and properties assigned to the object and this is used by the dynamic type system to determine whether 
-	One feature
-	- inheritance
-	- loose typing
-	- dynamic
-
-
+\input{./LatexFiles/Type_System}
 \section{Security}
 %%	- XSS
 %%	- Compare with Java
 %%	- Sandboxing
-%%        - the importance of validation
+%%  - the importance of validation
+%%  - the eval() statement
+%%  - malformed html inclusion
 %%JavaScript can be used to validate data in HTML forms before sending off the content to a server.
 %%Form data that typically are checked by a JavaScript could be:
 %%    has the user left required fields empty?
