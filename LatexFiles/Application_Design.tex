@@ -1,5 +1,5 @@
 \paragraph{} 
-\texttt{JavaScript} is a scripting language, not a programming language. It is easier for non-programmers to use a language like \texttt{JavaScript} than \texttt{Java} to develop a web application. \texttt{JavaScript} has a set of features design to make it more forgiving and easier to use for new programmers. However, these features does not incite developers to design properly their application. Besides, this lack of constraints may make bugs more likely. 
+\texttt{JavaScript} is a scripting language, not a programming language. It is easier for non-programmers to use a language like \texttt{JavaScript} than \texttt{Java} to develop a web application. \texttt{JavaScript} has a set of features design to make it more forgiving and easier to use for beginner programmers. However, these features does not incite developers to design properly their application. Besides, this lack of constraints may make bugs more likely. 
 
 \subsection{Scope of variables}
 
@@ -24,7 +24,8 @@ With \texttt{JavaScript} it is very easy to use a lot of global variables, and t
 
 \paragraph{}
 With \texttt{JavaScript} there is no block-level scope like in \texttt{Java} : even if a variable is defined inside a function, its scope is not always only the function. Programmers have to be very careful with the scope of variables in \texttt{JavaScript}.
-
+\subsection{Closure}
+A special case of the scoping rules of JavaScript allows for a very powerful feature. When a function is nested in an outer function, the nested function can access all variables in the outer function \emph{even after the outer function has returned}.
 \subsection{Creating an object}
 \paragraph{}
 \texttt{JavaScript} offers several ways to create an object with its fields and its methods. The listings~\ref{way1},~\ref{way2} and~\ref{way3} show the different options.
