@@ -1,0 +1,22 @@
+When you load a webpage on your browser code may be executed on your computer. Security is very important to prevent this code from damaging your data or accessing private information.
+
+\subsection{Restricted features}
+
+\paragraph{}
+\texttt{JavaScript} does not provide any function to delete or modify a file, or a directory on the client computer. Then, a \texttt{JavaScript} program cannot delete one of the user's file, or plant a virus in the user's system.
+
+\paragraph{}
+Besides, \texttt{JavaScript} does not provide any networking primitive : it cannot estalish a connection to another host. Thanks to this restriction, a \texttt{JavaScript} program cannot use a user's computer in order to crack passwords on another machine.
+
+\paragraph{}
+However, even if \texttt{JavaScript} programming language does not provide filesystem and networking functions, a \texttt{JavaScript} program may execute such functions via \texttt{ActiveX} for example.
+
+\subsection{The Same-Origin Policy}
+The \emph{Same-Origin Policy} is a really important security restriction in \texttt{JavaScript} :
+\begin{center} 
+A script can read only the properties of windows and documents that have the same origin (i.e., that were loaded from the \emph{same host}, through the \emph{same port}, and by the \emph{same protocol}) as the script itself. 
+\end{center} 
+
+
+\subsection{User privacy}
+\texttt{JavaScript} applications must not be allowed to export private information about the user. 
