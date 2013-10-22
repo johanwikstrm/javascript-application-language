@@ -2,9 +2,29 @@
 \paragraph{}
 The \texttt{JavaScript} syntax is easy, without a lot of contraints like in \texttt{Java}. For example, semi-colons are not compulsary at the end of each statement.
 
-\subsection{Semi-colons}
+\subsection{Scope of variables}
 
-\subsection{Global and local variables}
+\paragraph{}
+\texttt{Javascript} allows to the programmer to define \emph{local} and \emph{global} variables (listing~\ref{VarDefinition}).
+\begin{lstlisting}[caption={Defining variables}, label={VarDefinition}]
+    var i = 10; // a local variable
+    j = 20;     // a global variable
+\end{lstlisting}
+
+\paragraph{}
+In \texttt{JavaScript} local variables are declared with the keyword \texttt{var}. If the programmer forgets to add this keyword before the declaration of a variable it is a global variable. Global variables are accessible from anywhere, even in different files loaded on the same page. In the listing~\ref{variables}, even if the variable \texttt{j} is declared inside the function \texttt{f}, this variable is global : it will be accessible everywhere.  
+\begin{lstlisting}[caption={Global and local variables}, label={variables}]
+function f(x, y) {
+    var i = 10; // a local variable
+    j = 20;     // a global variable
+}
+\end{lstlisting}
+
+\paragraph{}
+With \texttt{JavaScript} it is very easy to use a lot of global variables, and to create them by accident (forgetting the keyword \texttt{var}). However, this is not a good programming practice. The scope of the global variables is not limited, they can be read and modified everywhere : it may be a source of unreadability. Code is easier to understand and to maintain when the scope of its variables is limited. Besides, it is very easy to overwrite gobal variables unintentionally and create bugs. Finally, it is very hard to reuse your code in another project if it contains a lot of global variables : the risk of collision is too important.
+
+\paragraph{}
+With \texttt{JavaScript} there is no scope like in \texttt{Java} : even if a variable is defined inside a function, its scope is not always only the function. Programmers have to be very careful with the scope of variables in \texttt{JavaScript}.
 
 \subsection{Creating an object}
 \paragraph{}
