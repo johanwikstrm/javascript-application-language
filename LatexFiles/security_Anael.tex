@@ -11,12 +11,37 @@ Besides, \texttt{JavaScript} does not provide any networking primitive : it cann
 \paragraph{}
 However, even if \texttt{JavaScript} programming language does not provide filesystem and networking functions, a \texttt{JavaScript} program may execute such functions via \texttt{ActiveX} for example.
 
-\subsection{The Same-Origin Policy}
-The \emph{Same-Origin Policy} is a really important security restriction in \texttt{JavaScript} :
-\begin{center} 
-A script can read only the properties of windows and documents that have the same origin (i.e., that were loaded from the \emph{same host}, through the \emph{same port}, and by the \emph{same protocol}) as the script itself. 
-\end{center} 
+\subsection{The Same Origin Policy (SOP)}
+
+\paragraph{}
+    A JavaScript is only allowed to read and/or write access to properties of elements, windows, or documents that share the same origin with the script. The origin of an element is defined by the \emph{protocol}, \emph{domain} and the \emph{port} that were used to access this element. See table~\ref{SOP} for examples. %% todo REFERENCE BIBLIO
+\begin{table}[h!]
+\begin{tabular}{|l|l|}
+      \hline
+      URL & Outcome\\
+      \hline\hline
+    http://store.company.com/dir2/other.html        & Success \\
+    http://store.company.com/dir/inner/another.html & Success \\
+    https://store.company.com/secure.html           & Failure (different protocol) \\
+    http://store.company.com:81/dir/etc.html        & Failure (different port) \\
+    http://news.company.com/dir/other.html          & Failure (different host) \\      
+      \hline
+\end{tabular}
+\caption{The SOP for the URL http://store.company.com/dir/page.html}\label{SOP}
+\end{table}
+
+\paragraph{}
+The \emph{Same Origin Policy} is a really important security restriction in \texttt{JavaScript}. It allows for example to ensure the user privacy. %% TODO other examples
+
+\paragraph{}
+This rule is a severe restriction and ensures the user privacy. Thanks to the Same Origin Policy a malicious script in one window cannot use DOM methods to access the content of documents in other browser windows. %% todo MORE explanations
+
+\paragraph{}
+However, this rule is sometimes too restrictive. Large web sites may use several servers. For example, a script from \texttt{home.netscape.com} might want to access the content of a document loaded from \texttt{developer.netscape.com}. \texttt{JavaScript 1.1} answers this problem thanks to the \texttt{domain} property of the Document object. By default, the \texttt{domain} property is the hostname of the server from which the document was loaded. However, the developer can set this property to a string that is a valid domain suffix of itself. For the example, the default value of the \texttt{domain} property is \texttt{home.netscape.com}, and in order to be able to access the content of a document loaded from \texttt{developer.netscape.com} the developer can set this property to \texttt{netscape.com}.
 
 
-\subsection{User privacy}
-\texttt{JavaScript} applications must not be allowed to export private information about the user. 
+\paragraph{}
+%% Conclusion for security
+if you write a webapplication in JavaScript, you cannot be careful about all the security issues.
+the browser -> CSRF
+the user -> ???
