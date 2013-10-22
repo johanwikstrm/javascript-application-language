@@ -47,8 +47,7 @@ a.method = function(){print("hello")}
 
 \end{verbatim}
 
-\begin{verbatim}
-Java
+\begin{lstlisting}[caption=Java]
 class A {
 	public String property;
 	public void method(){
@@ -58,11 +57,37 @@ class A {
 A a = new A();
 a.property = "a";
 a.property2 = "b"; // Invalid, was not specified in class
-\end{verbatim}
+\end{lstlisting}	
 %https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain
-Another difference between Java and JavaScript is the way inheritance is implemented. In Java, a class can statically inherit methods and variables from a parent class. In JavaScript, there are no classes, only dynamic objects, so JavaScript uses another form of inheritance. All objects in a JavaScript execution are linked to a prototype object. The prototype describes the methods and properties assigned to the object and this is used by the dynamic type system to determine whether 
-	One feature
-	- inheritance
-	- loose typing
-	- dynamic
+Another difference between Java and JavaScript is the way inheritance is implemented. In Java, a class can statically inherit methods and variables from a parent class. In JavaScript, there are no classes, only dynamic objects, so JavaScript uses another form of inheritance. All objects in a JavaScript execution are linked to a prototype object. The prototype describes the methods and properties assigned to the object and this is used by the dynamic type system to determine whether a particular object contains the method or property. This prototype can in turn be linked to a parent prototype, forming a prototype inheritance chain. To create an object and link it to another objects prototype,i.e. create an inheritance relation, JavaScript provides the Object.create() method as shown in listing~\ref{inheritance}.
 
+\begin{lstlisting}[caption=Inheritance,label=inheritance]
+var a = {prop:'hello'};
+var b = Object.create(a); // b inherits from a
+console.log(b.prop);      // prints 'hello'
+a.prop = 'hi';
+console.log(b.prop);      // prints 'hi'
+b.prop = 'bye';           // now b.prop will override a.prop
+console.log(b.prop)       // prints 'bye'
+\end{lstlisting}	
+This mechanism is more powerful but less robust than the Java class inheritance. Since the connection between the parent and child is dynamic, any changes in the parent object propagates to the child even after the child is created, as shown in listing~\ref{inheritance}. But on the other hand, changes in the child does not propagate to the parent and may break the link to the parent as shown in listing~\ref{inheritance} which can make this type of inheritance more error prone than classical inheritance. 
+
+But the prototypal inheritance is more powerful than its classical counterpart. One example of this is that you can relatively easily emulate classical inheritance using prototypal inheritance but not vice versa.
+
+
+
+\subsection{The function object}
+One very powerful feature of JavaScript is the function object. In JavaScript, there is no dedicated function type but the function type inherits from Object. This means that functions can be treated as objects which makes the language considerably more powerful. Functions treated like objects enables the use of higher order functions, making JavaScript into \emph{both} an object oriented and functional language enabling very advanced concepts. A small example of this power is shown in listing~\ref{functionobject}
+
+\begin{lstlisting}[caption=Inheritance,label=inheritance]
+function map(f,array){
+	for (var i=0;i<array.length; i++){
+		array[i] = f(array[i]);
+	}
+	return array;
+}
+function add2(x){
+	return x+2;
+}
+map(add2,[1,2,4]); // will return [3,4,6]
+\end{lstlisting}	
