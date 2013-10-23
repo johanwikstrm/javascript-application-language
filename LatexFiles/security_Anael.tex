@@ -3,18 +3,15 @@ JavaScript runs in a restricted environment to prevent developers from executing
 \subsection{Restricted features}
 
 \paragraph{}
-\texttt{JavaScript} does not provide any function to delete or modify a file, or a directory on the client computer. Then, a \texttt{JavaScript} program cannot delete one of the user's file, or plant a virus in the user's system.
+\texttt{JavaScript} does not provide functions to delete or modify files, or directories on the client computer. This prevents \texttt{JavaScript} programs from deleting one of the user's files, or planting a virus in the user's system. \texttt{JavaScript} does not provide any networking primitives, it cannot establish a connection to another host. Thanks to this restriction, a \texttt{JavaScript} program cannot use a user's computer in order to crack passwords on another machine.
 
 \paragraph{}
-Besides, \texttt{JavaScript} does not provide any networking primitive : it cannot estalish a connection to another host. Thanks to this restriction, a \texttt{JavaScript} program cannot use a user's computer in order to crack passwords on another machine.
-
-\paragraph{}
-However, even if \texttt{JavaScript} programming language does not provide filesystem and networking functions, a \texttt{JavaScript} program may execute such functions via \texttt{ActiveX} for example.
+However, even if the \texttt{JavaScript} programming language does not provide filesystem and networking functions, HTML5 provides many of these functionalities as browser API:s.
 
 \subsection{The Same Origin Policy (SOP)}
 
 \paragraph{}
-    A JavaScript is only allowed to read and/or write access to properties of elements, windows, or documents that share the same origin with the script. The origin of an element is defined by the \emph{protocol}, \emph{domain} and the \emph{port} that were used to access this element. See table~\ref{SOP} for examples. %% todo REFERENCE BIBLIO
+    A JavaScript is only given read and/or write access to properties of elements, windows, or documents that share the same origin with the script. The origin of an element is defined by the \emph{protocol}, \emph{domain} and the \emph{port} that were used to access this element. See table~\ref{SOP} for examples. %% todo REFERENCE BIBLIO
 \begin{table}[h!]
 \begin{tabular}{|l|l|}
       \hline
@@ -29,38 +26,19 @@ However, even if \texttt{JavaScript} programming language does not provide files
 \end{tabular}
 \caption{The SOP for the URL http://store.company.com/dir/page.html}\label{SOP}
 \end{table}
-
 \paragraph{}
-The \emph{Same Origin Policy} is a really important security restriction in \texttt{JavaScript}. It allows for example to ensure the user privacy. %% TODO other examples
+This rule is a severe restriction and ensures the user's privacy. Thanks to the Same Origin Policy a malicious script in one window cannot use DOM methods to access the content of documents in other browser windows.
 
-\paragraph{}
-This rule is a severe restriction and ensures the user privacy. Thanks to the Same Origin Policy a malicious script in one window cannot use DOM methods to access the content of documents in other browser windows. %% todo MORE explanations
+However, this is in many respects the only line of defense. All of the contents \emph{within} the browser window have the same security level due to JavaScript's heavy reliance on global variables. So if a user can inject just one line of malicious code into a web page, he or she gets access to all the information in that domain.
 
-\paragraph{}
-However, this rule is sometimes too restrictive. Large web sites may use several servers. For example, a script from \texttt{home.netscape.com} might want to access the content of a document loaded from \texttt{developer.netscape.com}. \texttt{JavaScript 1.1} answers this problem thanks to the \texttt{domain} property of the Document object. By default, the \texttt{domain} property is the hostname of the server from which the document was loaded. However, the developer can set this property to a string that is a valid domain suffix of itself. For the example, the default value of the \texttt{domain} property is \texttt{home.netscape.com}, and in order to be able to access the content of a document loaded from \texttt{developer.netscape.com} the developer can set this property to \texttt{netscape.com}.
+\paragraph{} %% TODO: make shorter ?
+However, this rule is sometimes too restrictive. Large web sites may use several servers. For example, a script from \texttt{home.netscape.com} might want to access the content of a document loaded from \texttt{developer.example.com}. \texttt{JavaScript 1.1} answers this problem thanks to the \texttt{domain} property of the Document object. By default, the \texttt{domain} property is the hostname of the server from which the document was loaded. However, the developer can set this property to a string that is a valid domain suffix of itself. For the example, the default value of the \texttt{domain} property is \texttt{home.example.com}, and in order to be able to access the content of a document loaded from \texttt{developer.example.com} the developer can set this property to \texttt{example.com}.
 \subsection{Cross site scripting}
-Cross site scripting is one of the most common security breaches today. It is a generic term describing the insertion of malicious code into a webpage. Cross site scripting is not limited to JavaScript but the language has several features that facilitate cross site scripting.
+Cross site scripting is one of the most common security breaches today\cite{owasp}. It is a generic term describing the insertion of malicious code into a web page by using client side technology. Cross site scripting is not limited to JavaScript but the language has some features that facilitate cross site scripting.
 
-One way to insert malicious code into a web page is to trick the server into inserting the correct HTML tags into a dynamic web page. This is facilitated by the fact that JavaScript can be inserted and run anywhere on a web page by using the \texttt{<script>} tag. One example of this can be shown in listing~\ref{htmlinsertion} and the problem is amplified by browser makers that are trying to make sense out of broken script tags and run them. So even if the web server has some sort of protection of script inclusion, it is often insufficient.
-\begin{lstlisting}[caption={Insertion of malicious script on the server side},label={htmlinsertion},language={html}]
-<!-- the user has previously submitted his name to the application -->
-<html>
-<body>
-<!-- Here Mr Anderson is fetched from a database-->
-<p>Hello Mr Anderson</p> 
-</body>
-</html>
-<!--malicious case, the user has entered code instead of a name -->
-<html>
-<body>
-<p>Hello <script> evilCode();</script></p>
-</body>
-</html>
-\end{lstlisting}
-
-Another form of cross site scripting is the result of one unfortunate language feature. JavaScript has the ability to evaluate and run JavaScript using the eval() function. As demonstrated in listing~\ref{eval}, the eval function takes a string and runs the JavaScript code contained in it. In combination with the many global variables in JavaScript, this is disastrous from a security perspective. The use of eval() is strongly discouraged but it is still used by beginners, mainly for parsing JSON data.
-\begin{lstlisting}[caption={Insertion of malicious script on the client side, eval().},label={eval}]
-eval('var a = 5');              // creates variable a
+One common form of cross site scripting is the result of one unfortunate language feature. JavaScript has the ability to evaluate and run JavaScript using the eval() function. As demonstrated in listing~\ref{eval}, the eval function takes a string and runs the JavaScript code contained in it. In combination with the many global variables in JavaScript, this is disastrous from a security perspective. The use of eval() is strongly discouraged but it is still used by beginners, mainly for parsing JSON data.
+\begin{lstlisting}[caption={eval().},label={eval}]
+eval('var a = 5');               // creates variable a
 var jsonString = getJSON();
 eval(jsonString);                // evaluates possibly harmful input
 JSON.parse(jsonString);          // safe way to do the same thing
