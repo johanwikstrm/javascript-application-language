@@ -20,10 +20,10 @@ function f(x, y) {
 \end{lstlisting}
 
 \paragraph{}
-With \texttt{JavaScript} it is very easy to use a lot of global variables, and to create them by accident (forgetting the keyword \texttt{var}). However, this is not a good programming practice. The scope of the global variables is not limited, they can be read and modified everywhere : it may be a source of unreadability. Code is easier to understand and to maintain when the scope of its variables is limited. Besides, it is very easy to overwrite global variables unintentionally and create bugs. Finally, it is very hard to reuse your code in another project if it contains a lot of global variables : the risk of collision is too important.
+With \texttt{JavaScript} it is very easy to use a lot of global variables, and to create them by accident by forgetting the keyword \texttt{var}. However, this is not a good programming practice. The scope of the global variables is not limited, they can be read and modified everywhere causing hard to find bugs. The use of global variables limits code readability, reusal and testability.
 
 \paragraph{}
-With \texttt{JavaScript} there is no block-level scope like in \texttt{Java} : even if a variable is defined inside a function, its scope is not always only the function. Programmers have to be very careful with the scope of variables in \texttt{JavaScript}.
+With \texttt{JavaScript} there is no block-level scope like in \texttt{Java}, even if a variable is defined inside a function, its scope may be smaller than function scope. Programmers have to be careful with the scope of variables in \texttt{JavaScript}.
 \subsection{Closure}
 A special case of the scoping rules of JavaScript allows for a very powerful feature. When a function is nested in an outer function, the nested function can access all variables in the outer function \emph{even after the outer function has returned}. This property is called closure and can be very powerful since it allows us to hide implementation details, giving a form of private and public. A simple example is shown in listing~\ref{closure}.
 \begin{lstlisting}[caption={Example of closure}, label={closure}]
@@ -45,7 +45,7 @@ ticker();                  // prints 'boom'
 \end{lstlisting}
 \subsection{Creating an object}
 \paragraph{}
-\texttt{JavaScript} offers several ways to create an object with its fields and its methods. The listings~\ref{way1},~\ref{way2} and~\ref{way3} show the different options.
+\texttt{JavaScript} offers several ways to create an object with fields and methods. The listings~\ref{way1},~\ref{way2} and~\ref{way3} show the different options.
         
 \begin{lstlisting}[caption={Creating an object with a constructor}, label={way1}]
 function coordinates(x, y) {
@@ -66,7 +66,7 @@ var point = new coordinates(1, 2);
 \end{lstlisting}
         
 \begin{lstlisting}[caption=Creating an object with the "C-structure" syntax, label={way2}]
-// We suppose the functions setX and setY are defined before
+// We suppose the functions setX and setY are previously defined
 var point = {x:1, y:2, setX:setX, setY:setY};
 \end{lstlisting}
 
@@ -79,17 +79,12 @@ point.setX = setX;
 point.setY = setY;
 \end{lstlisting}
 
-Whatever the method used to create the object, it is always possible to add another field or another method dynamically (listing~\ref{addField}).
-\begin{lstlisting}[caption=Adding a new field or a new method dynamically", label={addField}]
-point.z = 3;
-function setZ(z) {
-        this.z = z;
-    }
-point.setZ = setZ;
-\end{lstlisting}
+% there used to be a paragraph about adding field dynamically here, 
+% but I removed it since it is mentioned later in the report
+
 
 \paragraph{}
-With the "C-structure" syntax and the operator \texttt{new Object()} it is very easy to develop a \texttt{JavaScript} application without thinking about the design of the application. Non-experienced developers may write code very quickly without thinking about readability for future developers and maintainability. However, the \texttt{JavaScript} constructors can be used as the classes in \texttt{Java} to define all the fields and the methods of an object.
+With the "C-structure" syntax and the operator \texttt{new Object()} it is easy to develop a \texttt{JavaScript} application without making a formal design of the application. Non-experienced developers may write code very quickly without thinking about readability for future developers and maintainability. However, the \texttt{JavaScript} constructors can be used as the classes in \texttt{Java} to define all the fields and the methods of an object.
 
 
 %%	Global object
