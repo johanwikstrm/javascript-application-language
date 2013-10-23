@@ -20,12 +20,29 @@ function f(x, y) {
 \end{lstlisting}
 
 \paragraph{}
-With \texttt{JavaScript} it is very easy to use a lot of global variables, and to create them by accident (forgetting the keyword \texttt{var}). However, this is not a good programming practice. The scope of the global variables is not limited, they can be read and modified everywhere : it may be a source of unreadability. Code is easier to understand and to maintain when the scope of its variables is limited. Besides, it is very easy to overwrite gobal variables unintentionally and create bugs. Finally, it is very hard to reuse your code in another project if it contains a lot of global variables : the risk of collision is too important.
+With \texttt{JavaScript} it is very easy to use a lot of global variables, and to create them by accident (forgetting the keyword \texttt{var}). However, this is not a good programming practice. The scope of the global variables is not limited, they can be read and modified everywhere : it may be a source of unreadability. Code is easier to understand and to maintain when the scope of its variables is limited. Besides, it is very easy to overwrite global variables unintentionally and create bugs. Finally, it is very hard to reuse your code in another project if it contains a lot of global variables : the risk of collision is too important.
 
 \paragraph{}
 With \texttt{JavaScript} there is no block-level scope like in \texttt{Java} : even if a variable is defined inside a function, its scope is not always only the function. Programmers have to be very careful with the scope of variables in \texttt{JavaScript}.
 \subsection{Closure}
-A special case of the scoping rules of JavaScript allows for a very powerful feature. When a function is nested in an outer function, the nested function can access all variables in the outer function \emph{even after the outer function has returned}.
+A special case of the scoping rules of JavaScript allows for a very powerful feature. When a function is nested in an outer function, the nested function can access all variables in the outer function \emph{even after the outer function has returned}. This property is called closure and can be very powerful since it allows us to hide implementation details, giving a form of private and public. A simple example is shown in listing~\ref{closure}.
+\begin{lstlisting}[caption={Example of closure}, label={closure}]
+function outer(nticks) {
+	var i = 0;
+	function inner(){
+		i++;               // here we have access to i
+		if(i < nticks)
+			console.log('tick');
+		else
+			console.log('boom')
+	}
+	return inner;          // i is still in scope inside inner()
+}
+var ticker = outer(3);     // ticker is now a function object
+ticker();                  // prints 'tick'
+ticker();                  // prints 'tick'
+ticker();                  // prints 'boom'
+\end{lstlisting}
 \subsection{Creating an object}
 \paragraph{}
 \texttt{JavaScript} offers several ways to create an object with its fields and its methods. The listings~\ref{way1},~\ref{way2} and~\ref{way3} show the different options.
