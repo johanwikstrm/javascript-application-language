@@ -1,4 +1,4 @@
-JavaScript has a loose dynamic type system. This means that when you create a variable, you do not need to specify a type and the type of the variable can change during execution. Internally there is a type however and there are six internal types:
+JavaScript has a loose dynamic type system. This means that when you create a variable, you do not need to specify a type and the type of the variable can change during execution as shown in listings \ref{javastypes} and \ref{javascripttypes} . Internally there is a type however and there are six built-in types:
 	%http://www.2ality.com/2013/09/types.html
 	\begin{enumerate}
 	\item Undefined
@@ -8,17 +8,17 @@ JavaScript has a loose dynamic type system. This means that when you create a va
 	\item Number
 	\item Object
 	\end{enumerate}
-\begin{lstlisting}[caption=Changing type of variable in Java]
+\begin{lstlisting}[caption=Changing type of variable in Java,label={javatypes}]
 int x = 1;
 x = "hi";   // invalid, causes compiler error
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Changing type of variable in JavaScript]
+\begin{lstlisting}[caption=Changing type of variable in JavaScript,label={javascripttypes}]
 var x = 1;  // now x has Number type
 x = "hi";   // now x has String type
 x = {};     // now x has Object type
 \end{lstlisting}
-	If a variables type does not fit the operation that is applied on it, JavaScript will attempt to \emph{coerce} the variable into that type. This can be a source of great confusion and many bugs since it effectively masks errors. But it can make programming easier for beginners since they do not have to worry about bitness, converting input strings into numbers and some sorts of zero inputs.
+	If a variable's type does not fit the operation that is applied on it, JavaScript will attempt to \emph{coerce} the variable into that type. This can be a source of great confusion and many bugs since it effectively masks errors. But it can make programming easier for beginners since they do not have to worry about bitness, converting input strings into numbers and some sorts of zero inputs.
 \begin{lstlisting}[caption=Automatic type coercion]
 2 + '10'   == '210' // Number coerced into String
 2 * '10'   == 20    // String coerced into Number
