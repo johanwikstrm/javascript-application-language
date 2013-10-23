@@ -1,4 +1,6 @@
-JavaScript has a loose, dynamic type system. This means that when you create a variable, you do not need to specify a type and the type of the variable can change during execution as shown in listings \ref{javatypes} and \ref{javascripttypes} . Internally there is a type however and there are six built-in types\cite{2ality}:
+
+\paragraph{}
+\texttt{JavaScript} has a loose, dynamic type system. This means that when you create a variable, you do not need to specify a type and the type of the variable can change during execution as shown in listings \ref{javatypes} and \ref{javascripttypes} . Internally there is a type however and there are six built-in types\cite{2ality}:
 	\begin{enumerate}
 	\item Undefined
 	\item Null
@@ -7,38 +9,45 @@ JavaScript has a loose, dynamic type system. This means that when you create a v
 	\item Number
 	\item Object
 	\end{enumerate}
-\begin{lstlisting}[caption=Changing type of variable in Java,label={javatypes}]
+        \begin{lstlisting}[caption=Changing the type of a variable in \texttt{Java},label={javatypes}]
 int x = 1;
 x = "hi";   // invalid, causes compiler error
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Changing type of variable in JavaScript,label={javascripttypes}]
+\begin{lstlisting}[caption=Changing the type of a variable in \texttt{JavaScript},label={javascripttypes}]
 var x = 1;  // now x has Number type
 x = 'hi';   // now x has String type
 x = {};     // now x has Object type
 \end{lstlisting}
-	If a variable's type does not fit the operation that is applied on it, JavaScript will attempt to \emph{coerce} the variable into that type. This can be a source of great confusion and many bugs since it effectively masks errors. But it can make programming easier for beginners since they do not have to worry about bitness, converting input strings into numbers and some sorts of zero inputs.
+\paragraph{}
+	If a variable's type does not fit the operation that is applied to it, \texttt{JavaScript} will attempt to \emph{coerce} the variable into that type. This can be a source of great confusion and many bugs since it effectively masks errors. However it can make programming easier for beginners since they do not have to worry about bitness, converting input strings into numbers and some sorts of zero inputs.
 \begin{lstlisting}[caption=Automatic type coercion]
 2 + '10'   == '210' // Number coerced into String
 2 * '10'   == 20    // String coerced into Number
 true - 10  == -9    // Boolean coerced into Number
 \end{lstlisting}
 
-	In general, JavaScript tries to recover from errors made by the programmer, by avoiding throwing exceptions when encountering type errors. For example, when an uninitialized variable is used, there is no error but the variable is assigned the type Undefined and value undefined. This usually causes errors later in the program when the value is used. The errors are amplified by the fact that several normal operations are defined for the undefined value,as shown in listing~\ref{undefined} which further delays detection of the error.
+\paragraph{}
+In general, \texttt{JavaScript} tries to recover from errors made by the programmer, by avoiding throwing exceptions when encountering type errors. For example, when an uninitialized variable is used, there is no error : the variable is assigned the type \texttt{Undefined} and the value \texttt{undefined}. This usually causes errors later in the program when the value is used. The errors are amplified by the fact that several normal operations are defined for the undefined value (listing~\ref{undefined}) which further delays error detection.
 \begin{lstlisting}[caption=Normal operations on undefined value,label=undefined]
 1+undefined       == NaN
 ''+undefined      == 'undefined'
 undefined && true == undefined
 undefined || true == true
 \end{lstlisting}	
-This loose typing may be a disadvantage of the language when comparing the language to strongly typed languages such as Java. In Java the type system allows for static analysis of the code and many bugs are found at compile time. The true advantage of the loose type system only becomes apparent when the programmer uses the ability to augment types with new methods and properties at runtime.
+\paragraph{}
+This loose typing may be a disadvantage of the language when comparing the language to strongly typed languages such as \texttt{Java}. In \texttt{Java} the type system allows for static analysis of the code and many bugs are found at compilation time. 
+
+%%%% TODO I do not understand
+The true advantage of the loose type system only becomes apparent when the programmer uses the ability to augment types with new methods and properties at runtime.
 
 \subsection{JavaScript Object and prototyping}
-In Java, classes are static. There is no way to add a new method or property to an object after it is created. In JavaScript, there are no classes so all fields and methods are dynamic. This is a very powerful feature that may also be the cause of many bugs since fields and methods can be added and removed at any time during the programs execution. This source of errors is not present in Java as shown in listings \ref{dynclasses} and \ref{statclasses}.
+\paragraph{}
+In \texttt{Java}, classes are static. There is no way to add a new method or property to an object after it has been created. In \texttt{JavaScript}, there are no classes : all fields and methods are dynamic. This is a very powerful feature that may also be the cause of many bugs since fields and methods can be added and removed at any time during the program execution. This source of errors is not present in \texttt{Java} as shown in listings \ref{dynclasses} and \ref{statclasses}.
 
 \begin{lstlisting}[caption=JavaScript,label=dynclasses]
-a = {} 	// empty object
-a.property = "a"
+a = new Object(); // empty object
+a.property = "a";
 a.method = function(){print("hello")}
 \end{lstlisting}	
 
@@ -53,7 +62,8 @@ A a = new A();
 a.property = "a";
 a.property2 = "b"; // Compilation error, was not specified in class
 \end{lstlisting}
-Another difference between Java and JavaScript is the way inheritance is implemented. In Java, a class can statically inherit methods and variables from a parent class. In JavaScript, there are no classes, only dynamic objects, so JavaScript uses another form of inheritance. Each JavaScript object has a prototype object. The prototype describes the methods and properties assigned to the object and this is used by the dynamic type system to determine whether a particular object contains the method or property. This prototype can in turn be linked to a parent prototype, forming a prototype inheritance chain. To create an object and link it to another objects prototype,i.e. create an inheritance relation, JavaScript provides the Object.create() method as shown in listing~\ref{inheritance}.
+\paragraph{}
+Another difference between \texttt{Java} and \texttt{JavaScript} is the way inheritance is implemented. In \texttt{Java}, a class can statically inherit methods and variables from a parent class. In \texttt{JavaScript}, there are no classes, only dynamic objects, so \texttt{JavaScript} uses another form of inheritance. Each \texttt{JavaScript} object has a \emph{prototype object}. The prototype describes the methods and properties assigned to the object. It is used by the dynamic type system to determine whether a particular object contains a method or a property. This prototype can in turn be linked to a parent prototype, forming a prototype inheritance chain. To create an object and link it to another objects prototype, i.e. create an inheritance relation, \texttt{JavaScript} provides the \texttt{Object.create()} method (listing~\ref{inheritance}).
 
 \begin{lstlisting}[caption=Inheritance,label=inheritance]
 var a = {field:'hello'};
@@ -64,16 +74,17 @@ console.log(b.field);      // prints 'hi'
 b.field = 'bye';           // now b.field will override a.field
 console.log(b.field)       // prints 'bye'
 \end{lstlisting}	
-This mechanism is more powerful but less robust than the Java class inheritance. Since the connection between the parent and child is dynamic, any changes in the parent object propagates to the child even after the child is created, as shown in listing~\ref{inheritance}. But on the other hand, changes in the child does not propagate to the parent and may break the link to the parent which can make this type of inheritance more error prone than classical inheritance. This is also shown in listing \ref{inheritance}.
-
-But the prototypal inheritance is more powerful than its classical counterpart. One example of this is that you can relatively easily emulate classical inheritance using prototypal inheritance but not vice versa\cite{mozilla}.
-
+\paragraph{}
+This mechanism is more powerful but less robust than the \texttt{Java} class inheritance. Since the connection between the parent and child is dynamic, any change in the parent object propagates to the child, even after the child has been created (listing~\ref{inheritance}). On the other hand, changes in the child do not propagate to the parent. It may break the link to the parent which can make this type of inheritance more error prone than classical inheritance (\ref{inheritance}). However the prototypal inheritance is more powerful than its classical counterpart. One example is that you can relatively easily emulate classical inheritance using prototypal inheritance but not vice versa\cite{mozilla}.
 
 
+%%% TODO title ??
 \subsection{The function object}
-One very powerful feature of JavaScript is the function object. In JavaScript, there is no dedicated function type but the function type inherits from Object. This means that functions can be treated as objects which makes the language considerably more powerful. Functions treated like objects enables the use of higher order functions, making JavaScript into \emph{both} an object oriented and functional language. A small example of the advanced concepts made possible by this is shown in listing~\ref{functionobject}.
+\paragraph{}
+One very powerful feature of \texttt{JavaScript} is the function object. In \texttt{JavaScript}, there is no dedicated function type but the function type inherits from \texttt{Object}. Functions can be treated as objects which makes the language considerably more powerful. Functions treated like objects enables the use of higher order functions :  \texttt{JavaScript} is \emph{both} an object oriented and a functional language. A small example of the advanced concepts made possible by this multi paradigm is shown in listing~\ref{functionobject}.
 
-\begin{lstlisting}[caption=Inheritance,label=inheritance]
+%% TODO : title ???
+\begin{lstlisting}[caption=Inheritance,label=functionobject]
 function map(f,array){
 	for (var i=0;i<array.length; i++){
 		array[i] = f(array[i]);
