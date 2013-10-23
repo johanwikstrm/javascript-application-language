@@ -1,17 +1,17 @@
 \paragraph{} 
-\texttt{JavaScript} was originally designed as a scripting language to make it easier for beginners to create web applications. When compared to \texttt{Java}, \texttt{JavaScript} has a set of features design to make it more forgiving and easier to use. However, these features do not incite developers to design their application properly. Besides, this lack of constraints may make bugs more likely. But the language also has several advanced features, like closure, which could make it suitable for application development.
+\texttt{JavaScript} was originally designed as a scripting language to make it easier for beginners to create web applications. When compared to \texttt{Java}, \texttt{JavaScript} has a set of features designed to make it more forgiving and easier to use. However, these features do not incite developers to design their application properly. Besides, this lack of constraints may make bugs more likely. But the language also has several advanced features, like closure, which could make it suitable for application development.
 
 \subsection{Scope of variables}
 
 \paragraph{}
-\texttt{JavaScript} allows the programmer to define \emph{local} and \emph{global} variables (listing~\ref{VarDefinition}).
+\texttt{JavaScript} allows the programmer to define \emph{local} and \emph{global} variables as shown in listing~\ref{VarDefinition}.
 \begin{lstlisting}[caption={Defining variables}, label={VarDefinition}]
     var i = 10; // a local variable
     j = 20;     // a global variable
 \end{lstlisting}
 
 \paragraph{}
-In \texttt{JavaScript} local variables are declared with the keyword \texttt{var}. If the programmer forgets to add this keyword before the declaration of a variable it is a global variable. Global variables are accessible from anywhere, even in different files loaded on the same page. In the listing~\ref{variables}, even if the variable \texttt{j} is declared inside the function \texttt{f}, this variable is global : it will be accessible everywhere.  
+In \texttt{JavaScript} local variables are declared with the keyword \texttt{var}. If the programmer does not add this keyword before the declaration of a variable, it is a global variable. Global variables are accessible from anywhere, even in different files loaded on the same page. In listing~\ref{variables}, we see that even if the variable \texttt{j} is declared inside the function \texttt{f}, this variable is global - it will be accessible everywhere.  
 \begin{lstlisting}[caption={Global and local variables}, label={variables}]
 function f(x, y) {
     var i = 10; // a local variable
